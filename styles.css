@@ -514,6 +514,10 @@ body {
     color: var(--green);
 }
 
+.code-number {
+    color: var(--yellow);
+}
+
 .cursor {
     animation: blink 1s infinite;
 }
@@ -662,8 +666,68 @@ body {
     }
 }
 
+.about-text p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
 .about-intro {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.1rem;
+}
+
+.about-intro strong {
+    color: var(--accent-secondary);
+}
+
+.education-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    margin-bottom: 2rem;
+}
+
+.education-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 12px;
+    color: var(--accent-secondary);
+    flex-shrink: 0;
+}
+
+.education-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.degree {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.university {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.year {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+}
+
+.about-stats {
+    display: flex;
+    gap: 2rem;
 }
 
 .stat-item {
@@ -693,7 +757,7 @@ body {
 .image-frame {
     position: relative;
     width: 300px;
-    height: 360px;
+    height: 300px;
 }
 
 .frame-decoration {
@@ -702,8 +766,38 @@ body {
     border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: var(--border-radius);
     transform: rotate(3deg);
+    transition: var(--transition);
 }
 
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.profile-photo:hover img {
+    transform: scale(1.05);
+}
+
+.image-frame:hover .frame-decoration {
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: rotate(5deg);
+}
+
+/* Legacy avatar placeholder */
 .avatar-placeholder {
     width: 100%;
     height: 100%;
@@ -947,23 +1041,28 @@ body {
     color: var(--text-secondary);
     text-decoration: none;
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--bg-card);
     border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(139, 92, 246, 0.15);
     transition: var(--transition);
 }
 
 .contact-link:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: var(--accent-primary);
     color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+.contact-link svg {
+    color: var(--accent-secondary);
+    flex-shrink: 0;
 }
 
 /* Contact Form */
 .contact-form-wrapper {
     background: var(--bg-card);
-    border: 1px solid rgba(139, 92, 246, 0.15);
     border-radius: var(--border-radius);
+    border: 1px solid rgba(139, 92, 246, 0.15);
     padding: 2rem;
 }
 
@@ -988,14 +1087,13 @@ body {
 .form-group input,
 .form-group textarea {
     padding: 14px 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary);
+    border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: var(--border-radius-sm);
     color: var(--text-primary);
     font-family: var(--font-main);
     font-size: 1rem;
     transition: var(--transition);
-    resize: vertical;
 }
 
 .form-group input:focus,
@@ -1010,12 +1108,19 @@ body {
     color: var(--text-muted);
 }
 
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
 /* ===========================
    Footer
    =========================== */
 .footer {
-    padding: 2rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3rem 0;
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 .footer-content {
@@ -1026,9 +1131,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 8px;
     color: var(--text-muted);
     font-size: 0.9rem;
+}
+
+.footer-separator {
+    opacity: 0.3;
 }
 
 .heart-icon {
@@ -1044,12 +1153,8 @@ body {
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
-}
-
-.footer-separator {
-    opacity: 0.3;
 }
 
 /* ===========================
@@ -1062,25 +1167,37 @@ body {
 
     .nav-menu {
         position: fixed;
-        top: 70px;
-        left: 0;
+        top: 0;
+        right: -100%;
         width: 100%;
-        background: rgba(10, 10, 15, 0.98);
+        height: 100vh;
+        background: var(--bg-primary);
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 2rem 0;
-        gap: 1.5rem;
-        transform: translateY(-150%);
+        gap: 2rem;
         transition: var(--transition);
-        border-bottom: 1px solid rgba(139, 92, 246, 0.1);
     }
 
     .nav-menu.active {
-        transform: translateY(0);
+        right: 0;
     }
 
     .nav-toggle {
         display: flex;
+        z-index: 1001;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
 
     .hero {
@@ -1089,10 +1206,11 @@ body {
 
     .hero-badge {
         font-size: 0.75rem;
+        padding: 6px 12px;
     }
 
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
     }
 
     .hero-description {
@@ -1127,5 +1245,10 @@ body {
 
     .scroll-indicator {
         display: none;
+    }
+
+    .image-frame {
+        width: 250px;
+        height: 250px;
     }
 }
